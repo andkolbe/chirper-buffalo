@@ -3,12 +3,15 @@ development:
   dialect: postgres
   database: chirper_buffalo_development
   user: postgres
-  password: postgres
+  password: andrew00
   host: 127.0.0.1
   pool: 5
 
 test:
-  url: {{envOr "TEST_DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/chirper_buffalo_test?sslmode=disable"}}
+  # the envOr helper tries to get a value from an environment variable, the default to the second value 
+  # tries to get the TEST_DATABASE_URL value from environment, and defaults to postgres://pos...
+  # that way, you can provide a default value for development purposes, and allows to reconfigure the database settings from an env variable 
+  url: {{envOr "TEST_DATABASE_URL" "postgres://postgres:andrew00@127.0.0.1:5432/chirper_buffalo_test?sslmode=disable"}}
 
 production:
   url: {{envOr "DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/chirper_buffalo_production?sslmode=disable"}}
